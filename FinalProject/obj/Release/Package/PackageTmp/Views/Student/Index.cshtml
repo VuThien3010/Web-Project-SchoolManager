@@ -1,0 +1,52 @@
+﻿@model IEnumerable<FinalProject.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Student</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Student Name
+        </th>
+        <th>
+            Date of Birth
+        </th>
+        <th>
+            Student Phone
+        </th>
+        <th>
+            Student Password
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.studentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateofBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.studentPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.userPassword)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.studentId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.studentId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.studentId })
+            </td>
+        </tr>
+    }
+
+</table>

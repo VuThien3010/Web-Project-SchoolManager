@@ -1,0 +1,20 @@
+﻿@model IEnumerable<FinalProject.Subject>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>COMPUTER SCIENCE ACADEMY</h1>
+    <p style="font-size: 15pt;" class="lead">Build your career path by starting our courses right now.</p>
+    <p style="font-size: 13pt; font-style: italic;">Keep coding for a happy life.</p>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <h2>@item.subjectName</h2>
+            <p><a class="btn btn-default" href="/Home/About?subjectId=@item.subjectId">Learn more &raquo;</a></p>
+        </div>
+    }
+</div>

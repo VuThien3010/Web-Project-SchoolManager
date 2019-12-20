@@ -1,0 +1,50 @@
+﻿@model FinalProject.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Student Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentName)
+        </dd>
+
+        <dt>
+            Date of Birth
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateofBirth)
+        </dd>
+
+        <dt>
+            Student Phone
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentPhone)
+        </dd>
+
+        <dt>
+            Student Password
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.userPassword)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.studentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

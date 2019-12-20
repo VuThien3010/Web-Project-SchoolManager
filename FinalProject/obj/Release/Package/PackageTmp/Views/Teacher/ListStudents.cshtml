@@ -1,0 +1,76 @@
+﻿@model IEnumerable<FinalProject.Models.StudentViewModel>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script src="~/Scripts/ProjectScript/TeacherScript.js"></script>
+<h2>@ViewBag.SubjectName</h2>
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.Label("Sort by", new { @class = "navbar-brand" })</li>
+
+        <li><button type="button" onclick="requestFindStudent('SortByStudentName')" class="btn btn-info">Student Name</button></li>
+        <li><button type="button" onclick="requestFindStudent('SortByStudentId')" class="btn btn-info">Student Id</button></li>
+        <li><button type="button" onclick="requestFindStudent('SortByStudentBirthday')" class="btn btn-info">Student's date of birth</button></li>
+        <li><button type="button" onclick="requestFindStudent('SortByStudentGrade')" class="btn btn-info">Student's Grade</button></li>
+
+    </ul>
+</div>
+<div class="navbar-collapse collapse">
+    <b>@Html.Label("Search by", new { @class = "navbar-brand" })</b>
+    <select id="SearchBy" class="navbar-text">
+        <option value="SearchByStudentName">Student Name</option>
+        <option value="SearchByStudentId">StudentId</option>
+        <option value="SearchByStudentBirthDay">Student's date of birth</option>
+        <option value="SearchByStudentGrade">Grade</option>
+    </select>
+</div>
+<div class="navbar-collapse collapse">
+    <div class="nav navbar-nav">
+        <input type="text" id="inputText" oninput="requestFindStudent('')" class="navbar-text" />
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            <label>StudentId</label>
+        </th>
+        <th>
+            <label>Student Name</label>
+        </th>
+        <th>
+            <label>Birthday</label>
+        </th>
+        <th>
+            <label>Grade</label>
+        </th>
+
+        <th></th>
+    </tr>
+    <tbody id="DataSearching">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.studentId
+                </td>
+                <td>
+                    @item.studentName
+                </td>
+                <td>
+                    @item.birthDate
+                </td>
+                <td>
+                    @item.grade
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit Grade", "EditGrade", new { studentId=item.studentId  })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

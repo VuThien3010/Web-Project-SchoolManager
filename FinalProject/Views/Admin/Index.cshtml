@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FinalProject.Admin>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Admin Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.adminName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateofBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.adminPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.userPassword)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.adminName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateofBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.adminPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.userPassword)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.adminId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.adminId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.adminId })
+            </td>
+        </tr>
+    }
+
+</table>

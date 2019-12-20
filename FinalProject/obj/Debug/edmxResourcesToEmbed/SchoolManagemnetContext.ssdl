@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SchoolManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="adminId" />
+    </Key>
+    <Property Name="adminId" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="adminName" Type="varchar" MaxLength="30" />
+    <Property Name="DateofBirth" Type="datetime" />
+    <Property Name="adminPhone" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="subjectId" />
+      <PropertyRef Name="teacherId" />
+    </Key>
+    <Property Name="courseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subjectId" Type="int" Nullable="false" />
+    <Property Name="teacherId" Type="varchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="docId" />
+    </Key>
+    <Property Name="docId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="courseId" Type="int" />
+    <Property Name="teacherId" Type="varchar" MaxLength="40" />
+    <Property Name="docUrl" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Enrollment">
+    <Key>
+      <PropertyRef Name="courseId" />
+      <PropertyRef Name="studentId" />
+    </Key>
+    <Property Name="courseId" Type="int" Nullable="false" />
+    <Property Name="studentId" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Grade" Type="int" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="studentId" />
+    </Key>
+    <Property Name="studentId" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="studentName" Type="varchar" MaxLength="40" />
+    <Property Name="DateofBirth" Type="datetime" />
+    <Property Name="studentPhone" Type="int" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="subjectId" />
+    </Key>
+    <Property Name="subjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subjectName" Type="nvarchar" MaxLength="40" />
+    <Property Name="subjectDescription" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="teacherId" />
+    </Key>
+    <Property Name="teacherId" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="teacherName" Type="varchar" MaxLength="40" />
+    <Property Name="teacherPhone" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="userName" />
+    </Key>
+    <Property Name="userName" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="userPassword" Type="varchar" MaxLength="40" />
+    <Property Name="userType" Type="int" />
+  </EntityType>
+  <Association Name="FK_Admin_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userName" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="adminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_Subject">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="subjectId" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="subjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="teacherId" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="teacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Document_Course' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Document_Course" />-->
+  <Association Name="FK_Document_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Document" Type="Self.Document" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="teacherId" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="teacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Enrollment_Course' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Enrollment_Course" />-->
+  <Association Name="FK_Enrollment_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="studentId" />
+      </Principal>
+      <Dependent Role="Enrollment">
+        <PropertyRef Name="studentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userName" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="studentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Teacher_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userName" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="teacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SchoolManagementModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Enrollment" EntityType="Self.Enrollment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Admin_Users" Association="Self.FK_Admin_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Admin" EntitySet="Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_Subject" Association="Self.FK_Course_Subject">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_Teacher" Association="Self.FK_Course_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Document_Teacher" Association="Self.FK_Document_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Document" EntitySet="Document" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enrollment_Student" Association="Self.FK_Enrollment_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Enrollment" EntitySet="Enrollment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Users" Association="Self.FK_Student_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teacher_Users" Association="Self.FK_Teacher_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Teacher" EntitySet="Teacher" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

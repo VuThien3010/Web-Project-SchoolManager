@@ -1,0 +1,42 @@
+﻿@model IEnumerable<FinalProject.Enrollment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Enrollment</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Grade
+        </th>
+        <th>
+            Course ID
+        </th>
+        <th>
+            Student ID
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.courseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.studentId)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { cid = item.courseId, sid = item.studentId })
+            </td>
+        </tr>
+    }
+
+</table>

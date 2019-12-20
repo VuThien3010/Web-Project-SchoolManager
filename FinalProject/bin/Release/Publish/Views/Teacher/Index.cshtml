@@ -1,0 +1,21 @@
+﻿@model FinalProject.Teacher
+@{
+    ViewBag.Title = "Index";
+}
+<br /><br />
+<div class="form-group">
+    @Html.LabelFor(model => model.teacherName, "Name:", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.teacherName, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+    </div>
+</div>
+<br /><br />
+<div class="form-group">
+    @Html.LabelFor(model => model.teacherPhone, "Phone:", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.teacherPhone, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+    </div>
+</div>
+<br /><br />
+<p><a class="btn btn-default" href="/User/ChangePassword?username=@Model.teacherId">Change password</a></p>
+

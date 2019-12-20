@@ -1,0 +1,58 @@
+﻿@model FinalProject.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Teacher/Student Password
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userPassword)
+        </dd>
+
+        <dt>
+            User Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userType)
+        </dd>
+
+        <dt>
+            Admin Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin.adminName)
+        </dd>
+
+        <dt>
+            Student Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.studentName)
+        </dd>
+
+        <dt>
+            Teacher Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Teacher.teacherName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.userName }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

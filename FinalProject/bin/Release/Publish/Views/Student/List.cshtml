@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FinalProject.Models.ViewModel>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List Grade</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Subject Name
+        </th>
+        <th>
+            Course ID
+        </th>
+        <th>
+            Grade
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.subject.subjectName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => item.course.courseId)
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => item.enrollment.Grade)
+            </td>
+            <td>
+                @Html.ActionLink("Documents", "ListDocs", new { courseId = item.course.courseId
+               , studentId = item.enrollment.studentId}) 
+            </td>
+        </tr>
+    }
+</table>

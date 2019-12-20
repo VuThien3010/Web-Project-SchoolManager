@@ -1,0 +1,34 @@
+﻿@model IEnumerable<FinalProject.Models.DocumentViewModel>
+
+@{
+    ViewBag.Title = "ListDocs";
+}
+
+<h2>@ViewBag.SubjectName</h2>
+<script src="~/Scripts/ProjectScript/TeacherScript.js"></script>
+<p>
+    @Html.ActionLink("Add new document", "AddDocs")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label>Description</label>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.ActionLink("Download", "DownloadDoc", new {  url=item.docUrl }) |
+            @Html.ActionLink("Edit", "EditDoc", new {  docId=item.docId  }) |
+            <button type="button" onclick="deleteDoc(@item.docId)" class="btn btn-info">Delete</button>
+        </td>
+    </tr>
+}
+
+</table>

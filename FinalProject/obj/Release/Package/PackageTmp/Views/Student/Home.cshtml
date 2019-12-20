@@ -1,0 +1,54 @@
+﻿@model FinalProject.Student
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Home</h2>
+<h4>Student</h4>
+<hr />
+<section class="signup">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">Student information</h2>
+                <div class="register-form" id="register-form">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.studentName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.studentName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DateofBirth)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DateofBirth)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.studentPhone)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.studentPhone)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.User.userPassword)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.User.userPassword)
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

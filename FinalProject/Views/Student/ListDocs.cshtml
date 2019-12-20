@@ -1,0 +1,29 @@
+﻿@model IEnumerable<FinalProject.Document>
+
+@{
+    ViewBag.Title = "ListDocs";
+}
+
+<h2>ListDocs</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <label>Description</label>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.ActionLink("Download", "DownloadDoc", new { url = item.docUrl })
+        </td>
+    </tr>
+}
+
+</table>
